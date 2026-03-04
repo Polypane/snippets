@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://polypane.app/schemas/snippets.json",
+  "title": "Polypane Snippets",
+  "description": "Schema for Polypane snippets export files. Can contain snippets and/or folders with snippets.",
+  "type": "array",
+  "items": {
+    "oneOf": [{ "$ref": "#/definitions/snippet" }, { "$ref": "#/definitions/folder" }]
+  },
+  "definitions": {
+    "author": {
+      "description": "Optional author information as a string or object",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Author name"
+        },
+        {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Author name"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Optional author URL"
+            }
+          }
+        }
+      ]
+    },
+    "snippet": {
+      "type": "object",
+      "required": ["name", "language", "executionMode", "content"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the snippet"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["css", "javascript"],
+          "description": "The language of the snippet"
+        },
+        "executionMode": {
+          "type": "string",
+          "enum": ["load", "activate"],
+          "description": "When to execute the snippet: 'load' (on page load) or 'activate' (when manually activated)"
+        },
+        "content": {
+          "type": "string",
+          "description": "The code content of the snippet"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the snippet"
+        },
+        "author": {
+          "$ref": "#/definitions/author"
+        },
+        "categories": {
+          "type": "array",
+          "description": "Optional categories for organizing snippets",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "folder": {
+      "type": "object",
+      "required": ["name", "children"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the folder"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the folder"
+        },
+        "author": {
+          "$ref": "#/definitions/author"
+        },
+        "categories": {
+          "type": "array",
+          "description": "Optional categories for organizing folders",
+          "items": {
+            "type": "string"
+          }
+        },
+        "children": {
+          "type": "array",
+          "description": "Snippets contained in this folder",
+          "items": {
+            "$ref": "#/definitions/snippet"
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    [
+      {
+        "name": "Dark Mode Override",
+        "author": {
+          "name": "Jane Doe",
+          "url": "https://example.com/janedoe"
+        },
+        "categories": ["dark mode", "css"],
+        "language": "css",
+        "executionMode": "load",
+        "content": "body { background: #1a1a1a !important; color: #f0f0f0 !important; }",
+        "description": "Forces dark background and light text"
+      }
+    ],
+    [
+      {
+        "name": "Debugging Tools",
+        "description": "A collection of debugging snippets",
+        "author": "John Smith",
+        "categories": ["debugging", "utilities"],
+        "children": [
+          {
+            "name": "Show Outlines",
+            "language": "css",
+            "executionMode": "load",
+            "categories": ["debugging", "css"],
+            "content": "* { outline: 1px solid red !important; }"
+          },
+          {
+            "name": "Console Logger",
+            "language": "javascript",
+            "executionMode": "activate",
+            "categories": ["logging"],
+            "content": "console.log('Page loaded:', document.title);"
+          }
+        ]
+      }
+    ]
+  ]
+}

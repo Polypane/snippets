@@ -1,0 +1,16 @@
+{
+  "name": "polypane-snippets-validator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CLI utility to validate Polypane snippets against schema.json",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "validate": "node validate.js",
+    "help": "node validate.js --help"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

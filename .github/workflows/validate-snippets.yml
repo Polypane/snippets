@@ -1,0 +1,52 @@
+name: Validate snippets
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths:
+      - 'snippets/*.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate changed snippet files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          changed=0
+          while IFS= read -r -d '' file; do
+            if [[ "$file" != *.json ]]; then
+              continue
+            fi
+
+            changed=1
+            echo "Validating ${file}"
+            node validate.js "$file"
+          done < <(
+            git diff --name-only -z --diff-filter=ACMR \
+              "${{ github.event.pull_request.base.sha }}" \
+              "${{ github.event.pull_request.head.sha }}" \
+              -- snippets
+          )
+
+          if [ "$changed" -eq 0 ]; then
+            echo "No added or changed snippet files in this PR."
+            exit 0
+          fi
