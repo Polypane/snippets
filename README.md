@@ -4,23 +4,29 @@ A community-powered collection of snippets for the Polypane [snippets panel](htt
 
 ## Contributing
 
-To contribute, fork this repository, add your snippet to the snippets folder, and submit a pull request. Please ensure that your snippet includes a clear description. 
+To contribute, fork this repository, add your snippet to the snippets folder, and submit a pull request. Please ensure that your snippet includes a clear description. You can submit individual snippets or a single JSON file with a collection of snippets.
 
-You can submit individual snippets or a single json file with a collection of snippets.
+> Snippets can be [exported from Polypane](https://polypane.app/docs/snippets/#importing-and-exporting-snippets) directly. These don't include author, folder description or categories, so make sure to add those manually to your contribution.
 
-Snippets can be [exported from Polypane](https://polypane.app/docs/snippets/#importing-and-exporting-snippets) but note these do not include authors or categories, so make sure to add those manually to your contribution.
+PRs will be evaluated on a case-to-case basis. If you are unsure about your snippet, please first [create an issue](https://github.com/polypane/snippets/issues/new).
 
-### Validating your snippets locally
+### Validating snippets
 
-This repo includes a CLI validator powered by `ajv`:
+PRs can only be merged if the newly added snippets or collections follow the correct [JSON schema](schema.json) (both can be validated against the same schema). Added snippets are automatically checked when you open a PR, but you can also validate your snippets locally before submitting a PR:
+
 
 ```bash
 npm install
-npm run help
 npm run validate -- snippets/lang\ outliner.json
 ```
 
-The validator exits with code `0` for valid input. For invalid input, it exits with code `1` and prints the validation issues. It uses the schema defined in [schema.json](schema.json), which supports both individual snippet files and collections of snippets.
+The validator exits with code `0` for valid input. For invalid input, it exits with code `1` and prints the validation issues. 
+
+For more information on the validator script, you can run
+
+```bash
+npm run help
+```
 
 ## License
 
