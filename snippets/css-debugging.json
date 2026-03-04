@@ -8,10 +8,10 @@
     "categories": ["structure", "links"],
     "children": [
       {
-        "name": "outline external links",
+        "name": "outline all external links",
         "language": "css",
         "executionMode": "load",
-        "content": "a[href⁼https://] {\n  outline: 1px soldid red;\n}"
+        "content": "a[href^=https://] {\n  outline: 1px soldid red;\n}"
       }
     ]
   }
