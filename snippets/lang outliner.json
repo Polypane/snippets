@@ -2,9 +2,10 @@
   {
     "name": "Lang outliner",
     "language": "css",
+    "author": "Polypane",
     "executionMode": "load",
     "content": "[lang] {\n  outline: 2px solid rgba(71, 128, 180, 1);\n}\n[lang]::before {\n  content: attr(lang);\n  display: block;\n  position: absolute;\n  color: black;\n  background: rgba(71, 128, 180, 1);\n  padding: 0.5em;\n  font-family: monospace;\n}\n",
     "description": "Show all areas with a set language",
-    "categories": ["accessibility", "language"]
+    "categories": ["Accessibility", "Language"]
   }
 ]

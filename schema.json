@@ -34,7 +34,7 @@
     },
     "snippet": {
       "type": "object",
-      "required": ["name", "language", "executionMode", "content"],
+      "required": ["name", "language", "content"],
       "properties": {
         "name": {
           "type": "string",
@@ -68,7 +68,22 @@
             "type": "string"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "language": {
+                "const": "javascript"
+              }
+            },
+            "required": ["language"]
+          },
+          "then": {
+            "required": ["executionMode"]
+          }
+        }
+      ]
     },
     "folder": {
       "type": "object",
@@ -112,7 +127,6 @@
         },
         "categories": ["dark mode", "css"],
         "language": "css",
-        "executionMode": "load",
         "content": "body { background: #1a1a1a !important; color: #f0f0f0 !important; }",
         "description": "Forces dark background and light text"
       }
@@ -127,7 +141,6 @@
           {
             "name": "Show Outlines",
             "language": "css",
-            "executionMode": "load",
             "categories": ["debugging", "css"],
             "content": "* { outline: 1px solid red !important; }"
           },

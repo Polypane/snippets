@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Outline all external links",
+    "categories": ["Debugging", "Links"],
+    "author": "Polypane",
+    "language": "css",
+    "content": "a[href^=\"https://\"] {\n  outline: 1px solid red;\n}"
+  }
+]

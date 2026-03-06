@@ -1,0 +1,14 @@
+[
+  {
+    "name": "JS/No-JS Toggle",
+    "language": "javascript",
+    "executionMode": "activate",
+    "content": "(function(){var htmlElement=document.documentElement;if(htmlElement.classList.contains('js')){htmlElement.classList.remove('js');htmlElement.classList.add('no-js');}else{htmlElement.classList.remove('no-js');htmlElement.classList.add('js');}})();",
+    "description": "Toggles between the js and no-js classes on the HTML element.",
+    "author": {
+      "name": "Stuart Robson",
+      "url": "https://www.alwaystwisted.com"
+    },
+    "categories": ["JavaScript"]
+  }
+]

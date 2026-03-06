@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Inline CSS Inspector",
+    "language": "javascript",
+    "executionMode": "activate",
+    "content": "(function(){var d=document;var styles=Array.from(d.head.getElementsByTagName('style')).filter(s=>!s.hasAttribute('data-styled')&&!s.hasAttribute('data-emotion'));var c=d.createElement('div');c.style.cssText='position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:9999!important;background:#fff!important;color:#000!important;padding:15px!important;border-bottom:2px solid #000!important;max-height:80vh!important;overflow:auto!important;font:14px Arial!important;box-shadow:0 2px 10px rgba(0,0,0,0.3)!important;';var html='<h3 style=\\'margin:0 0 15px!important;font:bold 18px Arial!important;color:#000!important;\\'>Inline CSS in HEAD</h3>';if(styles.length===0){html+='<div style=\\'padding:10px!important;background:#f5f5f5!important;color:#000!important;border-left:3px solid #f33!important;\\'>No inline CSS found in the HEAD element.</div>';}else{html+='<div style=\\'margin-bottom:10px!important;color:#000!important;\\'>Found <strong>'+styles.length+'</strong> style blocks:</div>';styles.forEach(function(style,index){var cssText=style.textContent.trim().replace(/}/g,'}\\n').replace(/{/g,' {\\n  ').replace(/;/g,';\\n  ');html+='<div style=\\'margin:10px 0!important;padding:10px!important;background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:3px!important;\\'><div style=\\'color:#06a!important;font:bold 14px monospace!important;margin-bottom:5px!important;\\'>Style Block #'+(index+1)+' <span style=\\'color:#777!important;font-weight:normal!important;font-size:12px!important;\\'>('+cssText.length+' characters)</span></div><pre style=\\'margin:0!important;padding:8px!important;background:#fff!important;color:#333!important;font:13px monospace!important;overflow:auto!important;white-space:pre-wrap!important;border:1px solid #eee!important;max-height:300px!important;\\'>'+cssText.replace(/</g,'<').replace(/>/g,'>')+'</pre></div>';});}html+='<div id=\\'inline-css-close-btn\\' style=\\'position:absolute!important;top:10px!important;right:10px!important;background:#f33!important;color:#fff!important;border:none!important;padding:5px 10px!important;border-radius:3px!important;cursor:pointer!important;\\'>Close</div>';c.innerHTML=html;d.body.appendChild(c);document.getElementById('inline-css-close-btn').addEventListener('click',function(){c.remove();});})();",
+    "description": "Displays all inline CSS styles in the document head and style blocks in the page",
+    "author": {
+      "name": "Stuart Robson",
+      "url": "https://www.alwaystwisted.com"
+    },
+    "categories": ["CSS"]
+  }
+]

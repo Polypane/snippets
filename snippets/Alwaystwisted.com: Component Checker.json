@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Component Checker",
+    "language": "javascript",
+    "executionMode": "activate",
+    "content": "/*Edit this prefix to the prefix used by your own design system */\nconst PREFIX = \"vf-\";\n\n(function(){const prefix=PREFIX;if(prefix===null||prefix===''){return;}const elementsWithPrefix=document.querySelectorAll('*[class*=\\''+prefix+'\\']');const allElements=document.querySelectorAll('*');elementsWithPrefix.forEach(el=>{el.style.outline='2px solid green';el.style.position='relative';});allElements.forEach(el=>{if(![...el.classList].some(cls=>cls.startsWith(prefix))){el.style.outline='4px solid red';el.style.position='relative';}});})();",
+    "description": "Identify which elements use your design system classes",
+    "author": {
+      "name": "Stuart Robson",
+      "url": "https://www.alwaystwisted.com"
+    },
+    "categories": ["Design systems"]
+  }
+]
