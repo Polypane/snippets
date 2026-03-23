@@ -112,6 +112,34 @@ function collectJsonFiles(folderPath) {
     .map((entry) => path.join(folderPath, entry.name));
 }
 
+function checkUrlEncodedContent(collection) {
+  const errors = [];
+
+  function checkSnippet(snippet) {
+    const content = snippet.content;
+    if (typeof content !== "string") return;
+
+    if (content.startsWith("javascript:")) {
+      errors.push(`Snippet "${snippet.name}": content must not start with "javascript:" (remove the bookmarklet wrapper)`);
+    } else if (/%[0-9A-Fa-f]{2}/.test(content)) {
+      errors.push(`Snippet "${snippet.name}": content must not be URL-encoded (contains % sequences like %20)`);
+    }
+  }
+
+  function walk(items) {
+    for (const item of items) {
+      if (Array.isArray(item.children)) {
+        walk(item.children);
+      } else {
+        checkSnippet(item);
+      }
+    }
+  }
+
+  walk(collection);
+  return errors;
+}
+
 function validateFile(inputPath, validate) {
   let parsedInput;
   try {
@@ -126,11 +154,11 @@ function validateFile(inputPath, validate) {
   }
 
   const isValid = validate(collection);
-  if (isValid) {
-    return [];
+  if (!isValid) {
+    return formatAjvErrors(validate.errors);
   }
 
-  return formatAjvErrors(validate.errors);
+  return checkUrlEncodedContent(collection);
 }
 
 function main() {

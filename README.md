@@ -28,6 +28,10 @@ For more information on the validator script, you can run
 npm run help
 ```
 
+The validator script additionally checks if the snippets content is encoded correctly and will flag snippets that are encoded as bookmarklets directly. Snippets should not start with `javascript:` or be URL encoded. 
+
+If you want to clean these up quickly, import them into the Polypane snippets panel and export them again, which will fix the encoding.
+
 ## License
 
 This project is licensed under the [Apache License 2.0](LICENSE).
