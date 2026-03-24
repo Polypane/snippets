@@ -1,0 +1,21 @@
+[
+  {
+    "name": "A11y-tools.com: Misc Helpers.",
+    "description": "Misc helper tools from a11y-tools.com",
+    "author": {
+      "name": "Ian Lloyd",
+      "url": "https://a11y-tools.com/"
+    },
+    "categories": ["Helpers"],
+    "children": [
+      {
+        "name": "Get All Links in Selected Area",
+        "language": "javascript",
+        "executionMode": "activate",
+        "categories": ["HTML"],
+        "content": "(function(){(()=>{let e=document.createElement(\"style\");e.textContent=`\n    #link-picker-overlay {\n      position: fixed; inset: 0; z-index: 999999;\n      cursor: crosshair;\n    }\n    #link-picker-selection {\n      position: fixed; z-index: 9999999;\n      border: 2px solid #3b82f6;\n      background: rgba(59,130,246,0.15);\n      pointer-events: none;\n      display: none;\n    }\n    #link-picker-toast {\n      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);\n      background: #1e293b; color: #f1f5f9; padding: 10px 20px;\n      border-radius: 8px; font: 14px/1.5 monospace; z-index: 99999999;\n      box-shadow: 0 4px 20px rgba(0,0,0,0.4); pointer-events: none;\n    }\n  `,document.head.appendChild(e);let t=document.createElement(\"div\");t.id=\"link-picker-overlay\",document.body.appendChild(t);let o=document.createElement(\"div\");o.id=\"link-picker-selection\",document.body.appendChild(o);let l=document.createElement(\"div\");l.id=\"link-picker-toast\",l.textContent=\"\\uD83D\\uDD17 Drag to select an area and harvest links. Press Esc to cancel.\",document.body.appendChild(l);let i,n,r=!1,c=(e,t)=>({x:e+window.scrollX,y:t+window.scrollY}),a=(e,t,l,i)=>{let n=Math.min(e,l)-window.scrollX,r=Math.min(t,i)-window.scrollY,c=Math.abs(l-e),a=Math.abs(i-t);Object.assign(o.style,{display:\"block\",left:n+\"px\",top:r+\"px\",width:c+\"px\",height:a+\"px\"})},s=()=>{t.remove(),o.remove(),e.remove(),l.remove()},d=(e,t,o,l,i)=>{let n=Math.min(t,l),r=Math.max(t,l),c=Math.min(o,i),a=Math.max(o,i);return e.left<r&&e.right>n&&e.top<a&&e.bottom>c},p=(e,t,o,l)=>{let i=new Map;return document.querySelectorAll(\"a[href]\").forEach(n=>{let r=n.getBoundingClientRect(),c={left:r.left+window.scrollX,right:r.right+window.scrollX,top:r.top+window.scrollY,bottom:r.bottom+window.scrollY};if(!d(c,e,t,o,l))return;let a=n.href.trim(),s=(n.textContent||n.getAttribute(\"aria-label\")||n.getAttribute(\"title\")||\"(no text)\").trim().replace(/\\s+/g,\" \");a&&!i.has(a)&&i.set(a,s)}),i};t.addEventListener(\"mousedown\",e=>{r=!0;let t=c(e.clientX,e.clientY);i=t.x,n=t.y,o.style.display=\"none\"}),t.addEventListener(\"mousemove\",e=>{if(!r)return;let t=c(e.clientX,e.clientY);a(i,n,t.x,t.y)}),t.addEventListener(\"mouseup\",e=>{if(!r)return;r=!1;let t=c(e.clientX,e.clientY),o=p(i,n,t.x,t.y);if(s(),0===o.size){console.log(\"%c\\uD83D\\uDD17 Link Picker — No links found in selection.\",\"color:#f87171;font-weight:bold;\");return}console.group(`%c🔗 Link Picker — ${o.size} unique link(s) found`,\"color:#3b82f6;font-weight:bold;font-size:14px;\"),o.forEach((e,t)=>{console.log(`%c${e}\n%c${t}`,\"color:#f1f5f9;font-weight:bold;\",\"color:#94a3b8;\")}),console.groupEnd();let l=[...o.entries()].map(([e,t])=>`${t} — ${e}`).join(\"\\n\");console.log(\"%cPlain list (copy-friendly):\",\"color:#64748b;font-style:italic;\"),console.log(l),navigator.clipboard.writeText(l).then(()=>{console.log(\"%c✅ Results also copied to clipboard.\",\"color:#4ade80;font-weight:bold;\")}).catch(e=>{console.warn(\"Clipboard write failed:\",e)})}),document.addEventListener(\"keydown\",e=>{\"Escape\"===e.key&&(s(),console.log(\"%c\\uD83D\\uDD17 Link Picker cancelled.\",\"color:#94a3b8;\"))})})();})()",
+        "description": "Copies all link details in selected area of a page (drag to select)."
+      }
+    ]
+  }
+]
