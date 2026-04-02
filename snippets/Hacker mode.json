@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Hacker mode",
+    "language": "css",
+    "executionMode": "load",
+    "content": "html {\n  background: #000;\n}\nbody {\n  filter: grayscale(1) brightness(0.9) blur(0.5px) invert(1) contrast(4.5)\n    sepia(1) saturate(15) hue-rotate(40deg);\n}\n",
+    "description": "as made popular by https://xkcd.com/3227/",
+    "author": "Polypane",
+    "categories": ["CSS", "Fun"]
+  }
+]
